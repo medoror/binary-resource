@@ -36,7 +36,7 @@ describe "check" do
     end
     it "returns latest version when latest tag is given" do
       allow(Net::HTTP).to receive(:get_response)
-                              .and_return(JSON.parse(File.read("./fixtures/om-latest-releases-response.json")))
+                              .and_return(JSON.parse(File.read(File.join(__dir__, "fixtures", "om-latest-releases-response.json"))))
       payload = JSON.parse("{
             \"source\": {
                 \"repo\": \"pivotal-cf/om\",
@@ -52,7 +52,7 @@ describe "check" do
 
     it "returns last version when latest tag is given and version is null" do
       allow(Net::HTTP).to receive(:get_response)
-                              .and_return(JSON.parse(File.read("./fixtures/om-latest-releases-response.json")))
+                              .and_return(JSON.parse(File.read(File.join(__dir__, "fixtures", "om-latest-releases-response.json"))))
       payload = JSON.parse("{
             \"source\": {
                 \"repo\": \"pivotal-cf/om\",
