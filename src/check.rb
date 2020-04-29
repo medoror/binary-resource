@@ -3,8 +3,9 @@
 require 'json'
 require 'net/http'
 require 'uri'
+require_relative './payload'
 
-class Check
+class Check < Payload
 
   # STDIN:
   #   "source": {
@@ -19,16 +20,6 @@ class Check
   # {"version": "4.6.0"}
   # ]
 
-  attr_accessor :owner
-  attr_accessor :repo
-  attr_accessor :tag
-
-  def initialize(payload)
-    payload_split = payload["source"]["repo"].split("/")
-    @owner = payload_split[0]
-    @repo = payload_split[1]
-    @tag = payload["source"]["tag"]
-  end
   def pull_latest_versions
     uri = URI.parse("https://api.github.com/repos/#{@owner}/#{@repo}/releases")
     response = Net::HTTP.get_response(uri)
@@ -47,4 +38,4 @@ class Check
 
 end
 
-# Check.new(JSON.parse(ARGF.read)).main 
+# Check.new(JSON.parse(ARGF.read)).main

@@ -1,14 +1,23 @@
 #!/usr/bin/env ruby
+require_relative './payload'
+class In < Payload
 
-# {
-#   "source": {
-#     "download_link": "https://github.com/pivotal-cf/om/releases/download/4.6.0/om-linux-4.6.0.tar.gz",
-#     "tag": "4.6.0",
-#   },
-#   "version": { "version": 4.6.0}
-# }
-#
-#
-#
-#
-# https://gist.github.com/servel333/6642770
+  # STDIN:
+  #   "source": {
+  #     "repo": "pivotal-cf/om",
+  #     "tag": "4.6.0"
+  #   },
+  #   "version": { "version": 4.6.0 }
+  # }
+  #
+  # STDOUT
+
+  def main
+    # read version
+    # download the given version
+    # unpack tar and place in in bin dir
+  end
+end
+
+
+# In.new(JSON.parse(ARGF.read)).main

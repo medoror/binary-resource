@@ -3,25 +3,6 @@ require 'json'
 require 'net/http'
 
 describe "check" do
-
-  context "#initalize" do
-    it "sets tag and download link if passed in from json" do
-      payload = JSON.parse("{
-            \"source\": {
-                \"repo\": \"pivotal-cf/om\",
-                \"tag\": \"latest\"
-            },
-            \"version\": {
-                \"version\": \"4.6.0\"
-            }
-        }")
-
-      check = Check.new(payload)
-      expect(check.owner).to eq "pivotal-cf"
-      expect(check.repo).to eq "om"
-      expect(check.tag).to eq "latest"
-    end
-  end
   context "#pull_latest_versions" do
     it "returns the version of the tag given " do
       allow(Net::HTTP).to receive(:get_response).and_return(nil)
