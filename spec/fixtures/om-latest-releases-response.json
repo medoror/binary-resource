@@ -1,4 +1,4 @@
-{
+[{
   "url": "https://api.github.com/repos/pivotal-cf/om/releases/24691845",
   "assets_url": "https://api.github.com/repos/pivotal-cf/om/releases/24691845/assets",
   "upload_url": "https://uploads.github.com/repos/pivotal-cf/om/releases/24691845/assets{?name,label}",
@@ -275,4 +275,4 @@
   "tarball_url": "https://api.github.com/repos/pivotal-cf/om/tarball/4.6.0",
   "zipball_url": "https://api.github.com/repos/pivotal-cf/om/zipball/4.6.0",
   "body": "## Features\r\n- `configure-authentication` now supports\r\n  the `OM_DECRYPTION_PASSPHRASE` environment variable.\r\n\r\n## Bug Fixes\r\n- `configure-director` now correctly handles when you don't name your iaas_configuration `default` on vSphere.\r\n  Previously, naming a configuration anything other than `default` would result in an extra, empty `default` configuration.\r\n  This closes issue [#469](https://github.com/pivotal-cf/om/issues/469).\r\n- Downloading a stemcell associated with a product will try to download the light or heavy stemcell.\r\n  If anyone has experienced the recent issue with `download-product`\r\n  and the AWS heavy stemcell,\r\n  this will resolve your issue.\r\n  Please remove any custom globbing that might've been added to circumvent this issue.\r\n  For example, `stemcall-iaas: light*aws` should just be `stemcell-iaas: aws` now. \r\n- Heavy stemcells could not be downloaded. \r\n  Support has now been added.\r\n  Force download of the heavy stemcell (if available) with the `--stemcell-heavy` flag."
-}
+}]
