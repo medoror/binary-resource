@@ -20,7 +20,6 @@ describe "check" do
       expect(check.pull_latest_versions).to eq "4.4.1"
     end
     it "returns the version of the tag given and version is null" do
-      allow(Net::HTTP).to receive(:get_response).and_return(nil)
       payload = JSON.parse("{
             \"source\": {
                 \"repo\": \"pivotal-cf/om\",
@@ -35,7 +34,7 @@ describe "check" do
       expect(check.pull_latest_versions).to eq "4.4.1"
     end
     it "returns latest version when latest tag is given" do
-      allow(Net::HTTP).to receive(:get_response)
+      allow(HttpClient).to receive(:get)
                               .and_return(JSON.parse(File.read(File.join(__dir__, "fixtures", "om-latest-releases-response.json"))))
       payload = JSON.parse("{
             \"source\": {
@@ -49,10 +48,10 @@ describe "check" do
       check = Check.new(payload)
       expect(check.pull_latest_versions).to eq "4.6.0"
     end
-
     it "returns last version when latest tag is given and version is null" do
-      allow(Net::HTTP).to receive(:get_response)
-                              .and_return(JSON.parse(File.read(File.join(__dir__, "fixtures", "om-latest-releases-response.json"))))
+      allow(HttpClient).to receive(:get)
+                              .and_return(
+                                  JSON.parse(File.read(File.join(__dir__, "fixtures", "om-latest-releases-response.json"))))
       payload = JSON.parse("{
             \"source\": {
                 \"repo\": \"pivotal-cf/om\",
