@@ -1,6 +1,5 @@
 require_relative '../src/check'
 require 'json'
-require 'net/http'
 
 describe "check" do
   context "#pull_latest_versions" do
