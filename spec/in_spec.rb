@@ -33,4 +33,16 @@ describe "in" do
           .to raise_error "Download Link could not be retrieved"
     end
   end
+  context "#main" do
+    it "prints version and metadata to stdout" do
+      allow(HttpClient).to receive(:get)
+                               .and_return(
+                                   JSON.parse(File.read(File.join(__dir__, "fixtures", "om-single-tag-release.json"))))
+      allow(in_script).to receive(:get_download_link).and_return("https://github.com/pivotal-cf/om/releases/download/4.6.0/om-linux-4.6.0.tar.gz")
+      allow(in_script).to receive(:create_dest_dir).and_return("tmp/om")
+      allow(in_script).to receive(:download_binary)
+      stdout = "{\"version\":{\"version\":\"4.6.0\"},\"metadata\":[]}\n"
+      expect { in_script.main("tmp/") }.to output(stdout).to_stdout
+    end
+  end
 end

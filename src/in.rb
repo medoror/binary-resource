@@ -17,7 +17,7 @@ class In < Payload
   #
   # STDOUT
   # {
-  #     "version": { "id":"3"},
+  #     "version": { "version":"4.6.0"},
   #     "metadata":[]
   # }
   attr_accessor :version
@@ -50,11 +50,17 @@ class In < Payload
 
     download_binary(download_link, full_destination)
 
-    #output to stdout
+    output_to_stdout(@version)
 
   end
 
   private
+
+  def output_to_stdout(download_name)
+
+    output = {"version" => { "version" => download_name}, "metadata" => []}
+    puts output.to_json
+  end
 
   def download_binary(download_link, full_destination)
     cmd = TTY::Command.new
@@ -63,4 +69,4 @@ class In < Payload
 end
 
 
-In.new(JSON.parse(STDIN.read)).main(ARGV[0])
+# In.new(JSON.parse(STDIN.read)).main(ARGV[0])
