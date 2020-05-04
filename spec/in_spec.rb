@@ -41,6 +41,7 @@ describe "in" do
       allow(in_script).to receive(:get_download_link).and_return("https://github.com/pivotal-cf/om/releases/download/4.6.0/om-linux-4.6.0.tar.gz")
       allow(in_script).to receive(:create_dest_dir).and_return("tmp/om")
       allow(in_script).to receive(:download_binary)
+      allow(in_script).to receive(:untar_binary)
       stdout = "{\"version\":{\"version\":\"4.6.0\"},\"metadata\":[]}\n"
       expect { in_script.main("tmp/") }.to output(stdout).to_stdout
     end

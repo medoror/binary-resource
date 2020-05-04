@@ -48,7 +48,11 @@ class In < Payload
 
     full_destination = create_dest_dir(destination_dir)
 
-    download_binary(download_link, full_destination)
+    cmd = TTY::Command.new
+
+    download_binary(download_link, full_destination, cmd)
+    
+    untar_binary(download_link.match(/([^\/]+).gz/)[0], full_destination, cmd)
 
     output_to_stdout(@version)
 
@@ -57,13 +61,14 @@ class In < Payload
   private
 
   def output_to_stdout(download_name)
-
     output = {"version" => { "version" => download_name}, "metadata" => []}
     puts output.to_json
   end
 
-  def download_binary(download_link, full_destination)
-    cmd = TTY::Command.new
+  def untar_binary(download_name,full_destination,cmd)
+    cmd.run("tar -xf #{full_destination}/#{download_name} -C #{full_destination}")
+  end
+  def download_binary(download_link, full_destination, cmd)
     cmd.run("wget -q #{download_link} -P #{full_destination}")
   end
 end
