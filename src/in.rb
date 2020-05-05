@@ -51,7 +51,7 @@ class In < Payload
     cmd = TTY::Command.new
 
     download_binary(download_link, full_destination, cmd)
-    
+
     untar_binary(download_link.match(/([^\/]+).gz/)[0], full_destination, cmd)
 
     output_to_stdout(@version)
@@ -74,4 +74,4 @@ class In < Payload
 end
 
 
-# In.new(JSON.parse(STDIN.read)).main(ARGV[0])
+In.new(JSON.parse(ARGF.read)).main(ARGV[0])

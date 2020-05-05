@@ -32,4 +32,4 @@ class Check < Payload
   end
 end
 
-# Check.new(JSON.parse(ARGF.read)).main
+Check.new(JSON.parse(ARGF.read)).main
