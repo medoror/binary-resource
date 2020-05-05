@@ -32,4 +32,15 @@ class Check < Payload
   end
 end
 
-Check.new(JSON.parse(ARGF.read)).main
+if $PROGRAM_NAME == __FILE__
+  standard_input = $stdin.read
+  unless standard_input == ''
+    check_script = Check.new(JSON.parse(standard_input))
+    begin
+      check_script.main
+    rescue Errno::ENOENT => e
+      STDERR.puts e.message
+      exit(1)
+    end
+  end
+end

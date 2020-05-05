@@ -3,6 +3,8 @@ require_relative './payload'
 require 'tty-command'
 require_relative './http_client'
 
+puts __FILE__
+puts $PROGRAM_NAME
 
 class In < Payload
 
@@ -61,17 +63,28 @@ class In < Payload
   private
 
   def output_to_stdout(download_name)
-    output = {"version" => { "version" => download_name}, "metadata" => []}
+    output = {"version" => {"version" => download_name}, "metadata" => []}
     puts output.to_json
   end
 
-  def untar_binary(download_name,full_destination,cmd)
+  def untar_binary(download_name, full_destination, cmd)
     cmd.run("tar -xf #{full_destination}/#{download_name} -C #{full_destination}")
   end
+
   def download_binary(download_link, full_destination, cmd)
     cmd.run("wget -q #{download_link} -P #{full_destination}")
   end
 end
 
-
-In.new(JSON.parse(ARGF.read)).main(ARGV[0])
+if $PROGRAM_NAME == __FILE__
+  standard_input = $stdin.read
+  unless standard_input == ''
+    in_script = In.new(JSON.parse(standard_input))
+    begin
+      in_script.main(ARGV[0])
+    rescue Errno::ENOENT => e
+      STDERR.puts e.message
+      exit(1)
+    end
+  end
+end

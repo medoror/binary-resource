@@ -5,6 +5,8 @@ COPY src/in.rb /opt/resource/in
 COPY src/out.rb /opt/resource/out
 COPY Gemfile /opt/resource/Gemfile
 COPY vendor/ /opt/resource/vendor
+COPY src/payload.rb /opt/resource/
+COPY src/http_client.rb /opt/resource/
 
 RUN chmod +x /opt/resource/check /opt/resource/in /opt/resource/out
 
