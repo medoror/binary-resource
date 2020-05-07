@@ -2,7 +2,7 @@ resource_types:
   - name: binary
     type: docker-image
     source:
-      repository: medoror/binary-resource
+      repository: medoror/github-binary-resource
 resources:
   - name: om
     type: binary
