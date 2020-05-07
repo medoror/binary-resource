@@ -14,7 +14,7 @@ class Check < Payload
   # }
   #
   # STDOUT
-  # [{"version":"4.6.0"}]
+  # [{"version":"4.6.0"}] <- previous version
 
   def pull_latest_versions
     if @tag == "latest"
