@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require_relative './payload'
-require 'tty-command'
+require 'fileutils'
 require_relative './http_client'
 
 puts __FILE__
@@ -50,11 +50,10 @@ class In < Payload
 
     full_destination = create_dest_dir(destination_dir)
 
-    cmd = TTY::Command.new
 
-    download_binary(download_link, full_destination, cmd)
+    download_binary(download_link, full_destination)
 
-    untar_binary(download_link.match(/([^\/]+).gz/)[0], full_destination, cmd)
+    untar_binary(download_link.match(/([^\/]+).gz/)[0], full_destination)
 
     output_to_stdout(@version)
 
@@ -67,12 +66,12 @@ class In < Payload
     puts output.to_json
   end
 
-  def untar_binary(download_name, full_destination, cmd)
-    cmd.run("tar -xf #{full_destination}/#{download_name} -C #{full_destination}")
+  def untar_binary(download_name, full_destination)
+    system("tar -xf #{full_destination}/#{download_name} -C #{full_destination}")
   end
 
-  def download_binary(download_link, full_destination, cmd)
-    cmd.run("wget -q #{download_link} -P #{full_destination}")
+  def download_binary(download_link, full_destination)
+    system("wget --no-check-certificate #{download_link} -P #{full_destination}")
   end
 end
 
