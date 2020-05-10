@@ -1,4 +1,6 @@
-FROM ruby:2.7.1-alpine
+FROM ruby:2.7.1-alpine3.11
+
+RUN apk update && apk del wget openssl && apk --no-cache add ca-certificates wget openssl
 
 # Setup and run tests
 COPY src/ /opt/resource/src
