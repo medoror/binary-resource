@@ -3,8 +3,8 @@ require_relative './payload'
 require 'fileutils'
 require_relative './http_client'
 
-puts __FILE__
-puts $PROGRAM_NAME
+# puts __FILE__
+# puts $PROGRAM_NAME
 
 class In < Payload
 
