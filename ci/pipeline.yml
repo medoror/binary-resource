@@ -29,5 +29,9 @@ jobs:
           inputs:
             - name: om
           run:
-            path: om
-            args: ["version"]
+            path: /bin/sh
+            args:
+            - -exc
+            - |
+              pwd
+              ./om/om version
