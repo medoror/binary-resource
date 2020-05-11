@@ -26,14 +26,13 @@ resource_types:
   type: docker-image
   source:
     repository: medoror/github-binary-resource
-    tag: latest
 
 resources:
 - name: binary
   type: github-binary-resource
   source:
     repo: pivotal-cf/om
-    tag: om
+    tag: latest
 ```
 
 ## Source Configuration
