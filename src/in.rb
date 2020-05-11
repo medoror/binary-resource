@@ -29,11 +29,6 @@ class In < Payload
     @version = payload["version"]["version"]
   end
 
-  def create_dest_dir(destinator_dir)
-    created_dir = FileUtils.mkdir_p "#{destinator_dir}#{@repo}"
-    created_dir[0]
-  end
-
   def get_download_link(payload)
     # explicitly check for linux binary until we inject distro choice from recipe
     begin
@@ -48,12 +43,9 @@ class In < Payload
 
     download_link = get_download_link(response)
 
-    full_destination = create_dest_dir(destination_dir)
+    download_binary(download_link, destination_dir)
 
-
-    download_binary(download_link, full_destination)
-
-    untar_binary(download_link.match(/([^\/]+).gz/)[0], full_destination)
+    untar_binary(download_link.match(/([^\/]+).gz/)[0], destination_dir)
 
     output_to_stdout(@version)
 
