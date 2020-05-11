@@ -57,23 +57,21 @@ Will pull download the given version of the binary, untar, and place it in the d
 
 ## Running the tests
 
-Run the ruby tests
+Run the ruby tests locally
 
 ```
 bundle exec rspec .
 ```
 
-The tests have also been embedded with the Dockerfile; ensuring that the testing environment is consistent across any docker enabled platform. When the docker image builds, the test are run inside the docker container, on failure they will stop the build.
-
-Run the tests with the following commands for both alpine and ubuntu images:
-
-docker build -t github-binary-resource:latest .
-
 ## Building Docker Image
 
 ```bash
-docker build -t concourse-binary-resource .
+docker build -t github-binary-resource .
 ```
+The tests have also been embedded with the Dockerfile; ensuring that the testing environment is consistent across any docker enabled platform. When the docker image builds, the test are run inside the docker container, on failure they will stop the build.
+
+## Limitations
+Currently this resource will only download linux binaries
 
 ## License
 
