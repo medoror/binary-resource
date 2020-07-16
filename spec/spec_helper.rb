@@ -1,3 +1,4 @@
+# Redirect stdin when tests run
 RSpec.configure do |config|
   original_stdin = $stdin
   config.before(:all) do

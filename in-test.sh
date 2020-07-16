@@ -6,7 +6,7 @@ if [ -d "$DEST_DIR" ]; then
     echo "Deleting destination dir..."
 fi
 
-ruby src/in.rb "tmp/"  <<EOF
+ruby src/in.rb "tmp/"  <<JSON
 {
    "source": {
      "repo": "pivotal-cf/om",
@@ -14,4 +14,4 @@ ruby src/in.rb "tmp/"  <<EOF
    },
    "version": { "version": "4.5.0" }
  }
-EOF
+JSON

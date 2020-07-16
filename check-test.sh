@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ruby src/check.rb <<EOF
+ruby src/check.rb <<JSON
 {
    "source": {
      "repo": "pivotal-cf/om",
@@ -8,9 +8,9 @@ ruby src/check.rb <<EOF
    },
    "version": { "version": "4.5.0" }
  }
-EOF
+JSON
 
-ruby src/check.rb <<EOF
+ruby src/check.rb <<JSON
 {
    "source": {
      "repo": "pivotal-cf/om",
@@ -18,4 +18,4 @@ ruby src/check.rb <<EOF
    },
    "version": { "version": "4.4.1" }
  }
-EOF
+JSON
